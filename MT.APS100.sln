@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.APS100", "MT.APS100\MT.APS100.csproj", "{2119F40D-05C3-4993-8600-23DD11761078}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.APS100.Model", "MT.APS100.Model\MT.APS100.Model.csproj", "{C86085B1-C9E5-48C4-8A7C-F751B25E270F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.APS100.Service", "MT.APS100.Service\MT.APS100.Service.csproj", "{B60EFA20-B3A3-4895-9981-07BBB0037DBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2119F40D-05C3-4993-8600-23DD11761078}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2119F40D-05C3-4993-8600-23DD11761078}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2119F40D-05C3-4993-8600-23DD11761078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C86085B1-C9E5-48C4-8A7C-F751B25E270F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C86085B1-C9E5-48C4-8A7C-F751B25E270F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C86085B1-C9E5-48C4-8A7C-F751B25E270F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C86085B1-C9E5-48C4-8A7C-F751B25E270F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B60EFA20-B3A3-4895-9981-07BBB0037DBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B60EFA20-B3A3-4895-9981-07BBB0037DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B60EFA20-B3A3-4895-9981-07BBB0037DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B60EFA20-B3A3-4895-9981-07BBB0037DBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
