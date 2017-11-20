@@ -1,0 +1,177 @@
+﻿<Window x:Class="MT.APS100_A.Environment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MT.APS100_A"
+        mc:Ignorable="d"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:model="clr-namespace:MT.APS100.Model;assembly=MT.APS100.Model"
+        Title="Environment" Height="666" Width="700" WindowStartupLocation="CenterScreen" Icon="Pics/UIlogo.png" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="enumTransferMode" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="model:TransferMode" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                <Label Content="Transfer Mode" VerticalAlignment="Center"></Label>
+                <ComboBox Name="cboTransferMode" SelectedValue="{Binding selectedTransferMode}" ItemsSource="{Binding Source={StaticResource enumTransferMode}}"
+                            VerticalAlignment="Center" SelectionChanged="cboTransferMode_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Production Workspace" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></Label>
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Name="txtProductionWorkspace" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></TextBox>
+                        <Button Name="btnProductionWorkspace" Grid.Row="0" Grid.Column="1" Content="..."
+                                VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Click="btnProductionWorkspace_Click"></Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <GroupBox Header="Server data" Grid.Row="2" Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="server_data_IP" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></Label>
+                    <TextBox Name="txtServerDataIP" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBox>
+                    <Label Content="server_data_user" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"></Label>
+                    <TextBox Name="txtServerDataUser" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"></TextBox>
+                    <Label Content="server_data_password" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"></Label>
+                    <TextBox Name="txtServerDataPassword" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"></TextBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Server program" Grid.Row="2" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="server_pgm_IP" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></Label>
+                    <TextBox Name="txtServerProgIP" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBox>
+                    <Label Content="server_pgm_user" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"></Label>
+                    <TextBox Name="txtServerProgUser" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"></TextBox>
+                    <Label Content="server_pgm_password" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"></Label>
+                    <TextBox Name="txtServerProgPassword" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"></TextBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Main path" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="tester_type" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></Label>
+                    <TextBox Name="txtTesterType" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBox>
+                    <Label Content="Local_dlog_dir" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"></Label>
+                    <TextBox Name="txtLocalDlogDir" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"></TextBox>
+                    <Label Content="local_prog_dir" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"></Label>
+                    <TextBox Name="txtLocalProgDir" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"></TextBox>
+                    <Label Content="server_dlog_dir" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"></Label>
+                    <TextBox Name="txtServerDlogDir" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"></TextBox>
+                    <Label Content="server_prog_dir" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"></Label>
+                    <TextBox Name="txtServerProgDir" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"></TextBox>
+                    <Label Content="server_mesfile_dir" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"></Label>
+                    <TextBox Name="txtServerMESFileDir" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1"></TextBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="ui_control_flag" Grid.Row="4" Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="ui_clear_pgm_flag" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></Label>
+                    <CheckBox Name="chkUIClearProg" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"></CheckBox>
+                    <Label Content="start_clear_pgm_flag" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"></Label>
+                    <CheckBox Name="chkStartClearProg" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"></CheckBox>
+                    <Label Content="exit_clear_pgm_flag" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"></Label>
+                    <CheckBox Name="chkExitClearProg" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"></CheckBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="alarm_control_flag" Grid.Row="4" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="alarm_M01_flag" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></Label>
+                    <CheckBox Name="chkAlarmM01" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"></CheckBox>
+                    <Label Content="alarm_M02_flag" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"></Label>
+                    <CheckBox Name="chkAlarmM02" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"></CheckBox>
+                    <Label Content="alarm_M03_flag" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"></Label>
+                    <CheckBox Name="chkAlarmM03" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"></CheckBox>
+                    <Label Content="alarm_M04_flag" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"></Label>
+                    <CheckBox Name="chkAlarmM04" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"></CheckBox>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Content="Save" Name="btnSave" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40" Click="btnSave_Click"></Button>
+            <Button Content="Cancel" Name="btnCancel" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40" Click="btnCancel_Click"></Button>
+        </Grid>
+    </Grid>
+</Window>

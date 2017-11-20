@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>c86085b1-c9e5-48c4-8a7c-f751b25e270f</ProjectGuid>
+    <ProjectGuid>{C86085B1-C9E5-48C4-8A7C-F751B25E270F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MT.APS100.Model</RootNamespace>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\MerlinTest\DLL\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -30,24 +30,52 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BasicInfo.cs" />
+    <Compile Include="BinSummary.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="Condition.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Definitions.cs" />
+    <Compile Include="EnvironmentInfo.cs" />
+    <Compile Include="Limit.cs" />
+    <Compile Include="LotInfo.cs" />
+    <Compile Include="MTResponse.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductRevision.cs" />
+    <Compile Include="STDFSource.cs" />
+    <Compile Include="TestBase.cs" />
+    <Compile Include="TestCondition.cs" />
+    <Compile Include="TestFunction.cs" />
+    <Compile Include="TestLimit.cs" />
+    <Compile Include="TestResut.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit.cs" />
+    <Compile Include="Stdf.v4\BinaryWriter.cs" />
+    <Compile Include="Stdf.v4\Bps.cs" />
+    <Compile Include="Stdf.v4\Far.cs" />
+    <Compile Include="Stdf.v4\Gdr.cs" />
+    <Compile Include="Stdf.v4\Hbr.cs" />
+    <Compile Include="Stdf.v4\Mir.cs" />
+    <Compile Include="Stdf.v4\Mrr.cs" />
+    <Compile Include="Stdf.v4\Pcr.cs" />
+    <Compile Include="Stdf.v4\Pir.cs" />
+    <Compile Include="Stdf.v4\Prr.cs" />
+    <Compile Include="Stdf.v4\Ptr.cs" />
+    <Compile Include="Stdf.v4\Sbr.cs" />
+    <Compile Include="Stdf.v4\Sdr.cs" />
+    <Compile Include="Stdf.v4\StdfFileWriter.cs" />
+    <Compile Include="Stdf.v4\StdfRecord.cs" />
+    <Compile Include="Stdf.v4\Tsr.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>

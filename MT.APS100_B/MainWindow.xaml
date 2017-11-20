@@ -1,0 +1,337 @@
+﻿<Window x:Class="MT.APS100_B.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MT.APS100_B"
+        mc:Ignorable="d"
+        Title="Merlin Test Suite" Height="900" Width="1200" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Closed="Window_Closed" Icon="Pics/UIlogo.png">
+    <!--<Window.Resources>
+
+        <DropShadowEffect x:Key="MyEffect" ShadowDepth="0" Color="Blue" Opacity="1" BlurRadius="20"/>
+        <SolidColorBrush x:Key="Button_Color" Color="Green"></SolidColorBrush>
+        <DropShadowBitmapEffect x:Key="Button_Effect" Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5"/>
+        <Style TargetType="Button" x:Key="FlatButtonStyle">
+            <Setter Property="Background" Value="DarkCyan"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Menu>
+                <MenuItem Header="File" Height="30" Width="40">
+                    <MenuItem Header="Create Project" Name="Btn_CreateProject" Click="Btn_CreateProject_Click" />
+                    <MenuItem Header="Config Project" Name="Btn_Configuration" Click="Btn_Configuration_Click" />
+                    <MenuItem Header="Config Environment" Name="btnEnvironment" Click="btnEnvironment_Click" />
+                    <MenuItem Header="Manual Test" Name="chkManual" IsCheckable="True" Checked="chkManual_Checked" Unchecked="chkManual_Unchecked" IsEnabled="False" />
+                </MenuItem>
+            </Menu>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="1" Grid.Column="0" Content="Start Lot" Name="btnStartLot" Click="btnStartLot_Click" FontSize="20"></Button>
+            <Button Grid.Row="1" Grid.Column="1" Content="Save Test Result" Name="btnSaveTestResult" Click="btnSaveTestResult_Click" FontSize="20"></Button>
+            <Button Grid.Row="1" Grid.Column="2" Content="Full Lot End" Name="btnFullLotEnd" Click="btnFullLotEnd_Click" FontSize="20"></Button>
+            <Button Grid.Row="1" Grid.Column="3" Content="Exit" Name="btnExit" Click="btnExit_Click" FontSize="20"></Button>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid Name="grdLocation">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Label Name="lblProgramLocation" Grid.Row="0" Grid.Column="0" Content="Program Location" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="txtProgramLocation" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Margin="10" VerticalContentAlignment="Center"></TextBox>
+                <Label Name="lblDataLocation" Grid.Row="1" Grid.Column="0" Content="Data Location" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                <TextBox Name="txtDataLocation" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="10" VerticalContentAlignment="Center"></TextBox>
+            </Grid>
+            <Grid Name="grdStatus" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                <Label Name="lblStatus" Grid.Row="0" Content="Saving..." VerticalContentAlignment="Bottom" Margin="30,0,0,0" FontSize="20"></Label>
+                <ProgressBar Name="pgbStatus" Grid.Row="1" VerticalContentAlignment="Top" Margin="30,0,30,50" Maximum="100" Value="0"></ProgressBar>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="203"/>
+                <ColumnDefinition Width="*"/>
+                <!--<ColumnDefinition Width="203"/>-->
+            </Grid.ColumnDefinitions>
+            <Canvas Grid.Column="0" Margin="0,1,0,1">
+                <Canvas.Background>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <Image Source="Pics/JCET.jpg" Name="imgLOGO"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Canvas.Background>
+
+            </Canvas>
+            <GroupBox Grid.Column="0" Header="Manual Settings>>>" Name="gpbManualSettings" Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Loop" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                    <TextBox Name="txtLoop" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="1"></TextBox>
+                    <Label Content="Index time" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                    <TextBox Name="txtIndextime" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="100"></TextBox>
+                    <Button Name="btnManualTest" Content="Manual Test" Grid.Row="2" Grid.Column="0" Click="btnManualTest_Click" IsEnabled="False"></Button>
+                    <Button Name="btnStopManualTest" Content="Stop" Grid.Row="2" Grid.Column="1" Click="btnStopManualTest_Click"></Button>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Header="Display Input Information>>>">
+                <ScrollViewer>
+                    <ScrollViewer.Content>
+                        <TextBlock Name="txtLotInfo" TextWrapping="Wrap"/>
+                    </ScrollViewer.Content>
+                </ScrollViewer>
+            </GroupBox>
+            <!--<TextBlock Grid.Column="2" Padding="15" Name="txtStatus" VerticalAlignment="Center" Height="50" HorizontalAlignment="Left" Margin="5,5,0,0" Width="80" Background="Green" FontWeight="ExtraBlack">
+                       Processing
+            </TextBlock>-->
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <GroupBox Header="Data Log>>>">
+                <TabControl Margin="10" Name="tbcDlog" SelectionChanged="tbcDlog_SelectionChanged">
+                    <TabItem Header="Yield">
+                        <TabControl Margin="5" Name="tbcSummary" SelectionChanged="tbcSummary_SelectionChanged">
+                            <TabItem Header="All">
+                                <Grid Width="auto">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <GroupBox Header="ALL" Grid.Column="0">
+                                        <Grid Name="grdAllYield">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="6*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Name="lblAllDeviceTested" Grid.Row="0" Grid.Column="0" Content="Device Tested:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtAllDeviceTested" Grid.Row="0" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center" IsReadOnly="True" Text="0"></TextBox>
+                                            <Label Name="lblAllPassCount" Grid.Row="1" Grid.Column="0" Content="Pass Count:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtAllPassCount" Grid.Row="1" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center"></TextBox>
+                                            <Label Name="lblAllFailCount" Grid.Row="2" Grid.Column="0" Content="Fail Count:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtAllFailCount" Grid.Row="2" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center"></TextBox>
+                                            <Label Name="lblAllYield" Grid.Row="3" Grid.Column="0" Content="Yield:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtAllYield" Grid.Row="3" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center"></TextBox>
+                                        </Grid>
+                                    </GroupBox>
+                                    <GroupBox Header="Last100" Grid.Column="1">
+                                        <Grid Name="grdLastOYield">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="6*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Name="lblLastODeviceTested" Grid.Row="0" Grid.Column="0" Content="Last 100:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtLastODeviceTested" Grid.Row="0" Grid.Column="1" Margin="10,20,10,20" IsReadOnly="True" Text="100" VerticalContentAlignment="Center"></TextBox>
+                                            <Label Name="lblLastOPassCount" Grid.Row="1" Grid.Column="0" Content="Pass Count:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtLastOPassCount" Grid.Row="1" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center"></TextBox>
+                                            <Label Name="lblLastOFailCount" Grid.Row="2" Grid.Column="0" Content="Fail Count:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtLastOFailCount" Grid.Row="2" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center"></TextBox>
+                                            <Label Name="lblLastOYield" Grid.Row="3" Grid.Column="0" Content="Yield:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtLastOYield" Grid.Row="3" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center"></TextBox>
+                                        </Grid>
+                                    </GroupBox>
+                                    <GroupBox Header="LastN" Grid.Column="2">
+                                        <Grid Name="grdLastNYield">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="6*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Name="lblLastNDeviceTested" Grid.Row="0" Grid.Column="0" Content="Last N:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtLastNDeviceTested" Grid.Row="0" Grid.Column="1" Margin="10,20,10,20" Text="100" LostFocus="txtLastNDeviceTested_LostFocus" VerticalContentAlignment="Center"></TextBox>
+                                            <Label Name="lblLastNPassCount" Grid.Row="1" Grid.Column="0" Content="Pass Count:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtLastNPassCount" Grid.Row="1" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center"></TextBox>
+                                            <Label Name="lblLastNFailCount" Grid.Row="2" Grid.Column="0" Content="Fail Count:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtLastNFailCount" Grid.Row="2" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center"></TextBox>
+                                            <Label Name="lblLastNYield" Grid.Row="3" Grid.Column="0" Content="Yield:" Margin="10" VerticalContentAlignment="Center"></Label>
+                                            <TextBox Name="txtLastNYield" Grid.Row="3" Grid.Column="1" Margin="10,20,10,20" VerticalContentAlignment="Center"></TextBox>
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="HardBins">
+                                <DataGrid Name="dgrHardBins" AutoGenerateColumns="False"/>
+                            </TabItem>
+                            <TabItem Header="SoftBins">
+                                <DataGrid Name="dgrSoftBins" AutoGenerateColumns="False"/>
+                            </TabItem>
+                        </TabControl>
+                    </TabItem>
+                    <TabItem Header="Device Data">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid Grid.Column="0" Name="dgrTestResult" AutoGenerateColumns="False"/>
+                            <Grid Grid.Column="2" Name="grdTestResult" Height="200" VerticalAlignment="Top">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Site" Background="LightGray" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Grid.Row="0" Grid.Column="1" Content="SBin" Background="LightGray" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Grid.Row="0" Grid.Column="2" Content="HBin" Background="LightGray" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Grid.Row="0" Grid.Column="3" Background="LightGray" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                                    <TextBlock TextWrapping="Wrap" Text="Time(ms)"/>
+                                </Label>
+                                <Label Name="lblSite1" Grid.Row="1" Grid.Column="0" Content="1" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblSBin1" Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblHBin1" Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblTime1" Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblSite2" Grid.Row="2" Grid.Column="0" Content="2" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblSBin2" Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblHBin2" Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblTime2" Grid.Row="2" Grid.Column="3" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblSite3" Grid.Row="3" Grid.Column="0" Content="3" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblSBin3" Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblHBin3" Grid.Row="3" Grid.Column="2" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblTime3" Grid.Row="3" Grid.Column="3" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblSite4" Grid.Row="4" Grid.Column="0" Content="4" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblSBin4" Grid.Row="4" Grid.Column="1" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblHBin4" Grid.Row="4" Grid.Column="2" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <Label Name="lblTime4" Grid.Row="4" Grid.Column="3" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                <!--<Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="9" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="1"/>
+                                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                                <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                                <Border Grid.Row="2" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                                <Border Grid.Row="3" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                                <Border Grid.Row="4" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                                <Border Grid.Row="5" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                                <Border Grid.Row="6" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                                <Border Grid.Row="7" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,0,0,1"/>
+                                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="9" Grid.ColumnSpan="1" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                                <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="9" Grid.ColumnSpan="1" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                                <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="9" Grid.ColumnSpan="1" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Site" Background="LightGray" BorderBrush="Black" BorderThickness="1" />
+                                <Label Grid.Row="0" Grid.Column="1" Content="HBin" Background="LightGray" BorderBrush="Black" BorderThickness="1" />
+                                <Label Grid.Row="0" Grid.Column="2" Content="Site" Background="LightGray" BorderBrush="Black" BorderThickness="1" />
+                                <Label Grid.Row="0" Grid.Column="3" Content="HBin" Background="LightGray" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite1" Grid.Row="1" Grid.Column="0" Content="1" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin1" Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite2" Grid.Row="1" Grid.Column="2" Content="2"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin2" Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite3" Grid.Row="2" Grid.Column="0" Content="3"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin3" Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite4" Grid.Row="2" Grid.Column="2" Content="4"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin4" Grid.Row="2" Grid.Column="3" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite5" Grid.Row="3" Grid.Column="0" Content="5"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin5" Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite6" Grid.Row="3" Grid.Column="2" Content="6"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin6" Grid.Row="3" Grid.Column="3" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite7" Grid.Row="4" Grid.Column="0" Content="7"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin7" Grid.Row="4" Grid.Column="1" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite8" Grid.Row="4" Grid.Column="2" Content="8"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin8" Grid.Row="4" Grid.Column="3" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite9" Grid.Row="5" Grid.Column="0" Content="9"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin9" Grid.Row="5" Grid.Column="1" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite10" Grid.Row="5" Grid.Column="2" Content="10"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin10" Grid.Row="5" Grid.Column="3" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite11" Grid.Row="6" Grid.Column="0" Content="11"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin11" Grid.Row="6" Grid.Column="1" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite12" Grid.Row="6" Grid.Column="2" Content="12"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin12" Grid.Row="6" Grid.Column="3" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite13" Grid.Row="7" Grid.Column="0" Content="13"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin13" Grid.Row="7" Grid.Column="1" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite14" Grid.Row="7" Grid.Column="2" Content="14"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin14" Grid.Row="7" Grid.Column="3" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite15" Grid.Row="8" Grid.Column="0" Content="15"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin15" Grid.Row="8" Grid.Column="1" BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblSite16" Grid.Row="8" Grid.Column="2" Content="16"  BorderBrush="Black" BorderThickness="1" />
+                                <Label Name="lblHBin16" Grid.Row="8" Grid.Column="3" BorderBrush="Black" BorderThickness="1" />-->
+                            </Grid>
+                        </Grid>
+
+                    </TabItem>
+                    <!--<TabItem Header="Message">
+                        <ScrollViewer>
+                            <ScrollViewer.Content>
+                                <TextBlock Name="txtMessageLog" TextWrapping="Wrap" />
+                            </ScrollViewer.Content>
+                        </ScrollViewer>
+                    </TabItem>-->
+                </TabControl>
+            </GroupBox>
+        </Grid>
+        <Grid Name="grdPrinter" Visibility="Collapsed"></Grid>
+    </Grid>
+</Window>

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.APS100.Model", "MT.APS10
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.APS100.Service", "MT.APS100.Service\MT.APS100.Service.csproj", "{B60EFA20-B3A3-4895-9981-07BBB0037DBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.APS100_A", "MT.APS100_A\MT.APS100_A.csproj", "{358A4414-65EE-47C7-A0A1-C7251CEA0805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.APS100_B", "MT.APS100_B\MT.APS100_B.csproj", "{FE4F4BAD-F0C2-43A5-AB84-7A74C5D23C86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{B60EFA20-B3A3-4895-9981-07BBB0037DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B60EFA20-B3A3-4895-9981-07BBB0037DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B60EFA20-B3A3-4895-9981-07BBB0037DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{358A4414-65EE-47C7-A0A1-C7251CEA0805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358A4414-65EE-47C7-A0A1-C7251CEA0805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{358A4414-65EE-47C7-A0A1-C7251CEA0805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358A4414-65EE-47C7-A0A1-C7251CEA0805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE4F4BAD-F0C2-43A5-AB84-7A74C5D23C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4F4BAD-F0C2-43A5-AB84-7A74C5D23C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4F4BAD-F0C2-43A5-AB84-7A74C5D23C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4F4BAD-F0C2-43A5-AB84-7A74C5D23C86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
