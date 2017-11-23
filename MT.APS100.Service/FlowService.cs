@@ -31,19 +31,22 @@ namespace MT.APS100.Service
             siteNum = siteNumber;
             workMode = flowWorkMode;
 
-            string name = Path.GetFileNameWithoutExtension(flwPath);
-            programName = name.ToLower();
+            programName = Path.GetFileNameWithoutExtension(flwPath);
 
             testFlow = GetTestFlows();
             
             string dir = Path.GetDirectoryName(Path.GetDirectoryName(flwPath));
-			dllPath = Path.Combine(dir, "Debug", name + ".dll");
+			dllPath = Path.Combine(dir, "Debug", programName + ".dll");
             if (!File.Exists(dllPath))
             {
                 throw new Exception("Program dll does not exist!");
             }
+            Assembly assembly = Assembly.LoadFrom(dllPath);
+            Type type = assembly.GetType(assembly.GetTypes().First(x => x.Name == programName).FullName);
+            program = Activator.CreateInstance(type);
+            methods = type.GetMethods();
 
-            limitPath = Path.Combine(dir, "Limit", name + ".csv");
+            limitPath = Path.Combine(dir, "Limit", programName + ".csv");
             if (!File.Exists(limitPath))
             {
                 throw new Exception("Limit file does not exist!");
@@ -51,24 +54,17 @@ namespace MT.APS100.Service
             limits = GetLimits();
             ValidateLimits();
 
-            calPath = Path.Combine(FileStructure.USERCAL_DIR, name + ".csv");
+            calPath = Path.Combine(FileStructure.USERCAL_DIR, programName + ".csv");
         }
 
         public int Load()
         {
-            Assembly program = Assembly.LoadFrom(dllPath);
-            Type type = program.GetType(program.GetTypes().FirstOrDefault(x => x.Name.ToLower() == programName).FullName);
-            object obj = Activator.CreateInstance(type);
-            MethodInfo mi = type.GetMethod("ApplicationLoad");
-            return (int)mi.Invoke(obj, new object[2] { calPath, false });
+            MethodInfo mi = methods.First(x => x.Name == "ApplicationLoad");
+            return (int)mi.Invoke(program, new object[2] { calPath, false });
         }
 
         public List<DisplayTestResult> Start(int loop = 1)
         {
-            Assembly program = Assembly.LoadFrom(dllPath);
-            Type type = program.GetType(program.GetTypes().FirstOrDefault(x => x.Name.ToLower() == programName).FullName);
-            object obj = Activator.CreateInstance(type);
-
             resetActionOnFail();
             List<DisplayTestResult> DisplayTestResults = new List<DisplayTestResult>();
             
@@ -77,7 +73,7 @@ namespace MT.APS100.Service
                 if (isAllFailed() && workMode != FlowWorkMode.ContinueOnFail)
                     break;
 
-                MethodInfo mi = type.GetMethod(tf.Name);
+                MethodInfo mi = methods.First(x => x.Name == tf.Name);
 
                 object[] parameters = new object[tf.Parameters.Count];
 
@@ -89,7 +85,7 @@ namespace MT.APS100.Service
                 }
 
                 swapp.Start();
-                var res = mi.Invoke(obj, parameters);
+                var res = mi.Invoke(program, parameters);
                 swapp.Stop();
 				DisplayTestResults.AddRange(ResultParser((List<AppResult>)res, tf.Name, swapp.Elapsed.TotalMilliseconds));
 				swapp.Reset();
@@ -301,12 +297,9 @@ namespace MT.APS100.Service
 
         public void Unload()
         {
-            Assembly program = Assembly.LoadFrom(dllPath);
-            Type type = program.GetType(program.GetTypes().FirstOrDefault(x => x.Name.ToLower() == programName).FullName);
-            object obj = Activator.CreateInstance(type);
-            MethodInfo mi = type.GetMethod("ApplicationUnload");
+            MethodInfo mi = methods.First(x => x.Name == "ApplicationUnload");
             object[] parameters = new object[0];
-            int res = (int)mi.Invoke(obj, parameters);
+            int res = (int)mi.Invoke(program, parameters);
         }
 
         private List<TestFunction> GetTestFlows()
