@@ -63,7 +63,7 @@ namespace MT.APS100_A
 
         private int systemCount = 0;
         private BasicInfo currentBasicInfo = new BasicInfo();
-        private string lastDeviceName = string.Empty;
+        private string lastTestCode = string.Empty;
         private string lastProgramName = string.Empty;
 
         public MainWindow()
@@ -133,6 +133,7 @@ namespace MT.APS100_A
                     liMES.OKCallback += LotinfoMES_OKCallback;
                     if (liMES.ShowDialog().Value)
                     {
+                        lotInfo.TestCode.Value = lastTestCode;
                         LotinfoDlg liDLG = new LotinfoDlg(lotInfo, currentBasicInfo);
                         liDLG.OKCallback += LotinfoDlg_OKCallback;
                         if (!liDLG.ShowDialog().Value)
@@ -213,7 +214,7 @@ namespace MT.APS100_A
 
                     fulllot = new Dictionary<LotInfo, List<PartResult>>();
                     systemCount = 0;
-                    lastDeviceName = string.Empty;
+                    lastTestCode = string.Empty;
                     lastProgramName = string.Empty;
                     configuration = null;
 
@@ -607,8 +608,6 @@ namespace MT.APS100_A
         {
             try
             {
-                string mesFilePathServer = Path.Combine(enviConfig.ProductionWorkspace, "MesFile", lotInfo.ProgramName.ToString() + ".mes");
-
                 txtProgramLocation.Text = Path.Combine(enviConfig.LocalProgDir, lotInfo.ProgramName.ToString());
                 if (!Directory.Exists(txtProgramLocation.Text))
                 {
@@ -645,27 +644,20 @@ namespace MT.APS100_A
                     }
                     if (!check20)
                     {
-                        MessageBox.Show("alarm M11:批次信息存在异常字符, 如空格等，请重新输入 !");
-                        return false;
-                    }
-
-                    bool check21 = (lastDeviceName != string.Empty) ? (lastDeviceName == lotInfo.DeviceName.ToString()) : true;
-                    if (!check21)
-                    {
-                        MessageBox.Show("alarm M12:Device Name不一致，请重新输入 !");
+                        MessageBox.Show("alarm M11:批次信息存在异常字符, 如空格等，请确认后重新输入 !");
                         return false;
                     }
 
                     bool check23 = (lastProgramName != string.Empty) ? (lastProgramName == lotInfo.ProgramName.ToString()) : true;
                     if (!check23)
                     {
-                        MessageBox.Show("alarm M13:Program Name不一致，请重新输入 !");
+                        MessageBox.Show("alarm M12:程序名前后不一致，请确认后重新输入 !");
                         return false;
                     }
 
                     if (fulllot.Any(x => (x.Key.TestCode.ToString() == lotInfo.TestCode.ToString() && x.Key.SubLotNo.ToString() == lotInfo.SubLotNo.ToString())))
                     {
-                        MessageBox.Show("alarm M15:Test code重复， 请重新输入 !");
+                        MessageBox.Show(string.Format("alarm M13:子批次{0}中已存在{1}数据， 请确认后重新输入 !", lotInfo.SubLotNo.ToString(), lotInfo.TestCode.ToString()));
                         return false;
                     }
                 }
@@ -714,7 +706,7 @@ namespace MT.APS100_A
                 }
                 handlerService.Start();
 
-                lastDeviceName = lotInfo.DeviceName.ToString();
+                lastTestCode = lotInfo.TestCode.ToString();
                 lastProgramName = lotInfo.ProgramName.ToString();
                 systemCount += 1;
 

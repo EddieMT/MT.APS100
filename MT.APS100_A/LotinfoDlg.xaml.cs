@@ -22,6 +22,7 @@ namespace MT.APS100_A
     {
         public event OKCallback OKCallback;
         private LotInfo lotInfo;
+        private BasicInfo basicInfo;
 
         public LotinfoDlg(LotInfo LotInfo, BasicInfo BasicInfo)
         {
@@ -29,22 +30,24 @@ namespace MT.APS100_A
 
             lotInfo = LotInfo;
 
-            txtTesterID.Text = string.IsNullOrEmpty(BasicInfo.TesterID) ? "" : BasicInfo.TesterID;
+            basicInfo = BasicInfo;
+
+            txtTesterID.Text = string.IsNullOrEmpty(basicInfo.TesterID) ? "" : basicInfo.TesterID;
 
             txtProgramName.IsReadOnly = true;
             txtProgramName.Text = LotInfo.ProgramName.ToString();
 
-            txtOperatorID.Text = string.IsNullOrEmpty(BasicInfo.OperatorID) ? "" : BasicInfo.OperatorID;
+            txtOperatorID.Text = string.IsNullOrEmpty(basicInfo.OperatorID) ? "" : basicInfo.OperatorID;
 
-            txtCustomerID.Text = string.IsNullOrEmpty(BasicInfo.CustomerID) ? "" : BasicInfo.CustomerID;
+            txtCustomerID.Text = string.IsNullOrEmpty(basicInfo.CustomerID) ? "" : basicInfo.CustomerID;
 
-            txtDeviceName.Text = string.IsNullOrEmpty(BasicInfo.DeviceName) ? "" : BasicInfo.DeviceName;
+            txtDeviceName.Text = string.IsNullOrEmpty(basicInfo.DeviceName) ? "" : basicInfo.DeviceName;
 
-            txtCustomerLotNo.Text = string.IsNullOrEmpty(BasicInfo.CustomerLotNo) ? "" : BasicInfo.CustomerLotNo;
+            txtCustomerLotNo.Text = string.IsNullOrEmpty(basicInfo.CustomerLotNo) ? "" : basicInfo.CustomerLotNo;
 
-            txtSubLotNo.Text = string.IsNullOrEmpty(BasicInfo.SubLotNo) ? "" : BasicInfo.SubLotNo;
+            txtSubLotNo.Text = string.IsNullOrEmpty(basicInfo.SubLotNo) ? "" : basicInfo.SubLotNo;
 
-            //txtTestCode.Text
+            txtTestCode.Text = LotInfo.TestCode.ToString();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -77,19 +80,19 @@ namespace MT.APS100_A
             else
             {
                 lotInfo.TesterID.Value = txtTesterID.Text;
-                
+                basicInfo.TesterID = txtTesterID.Text;
                 lotInfo.ProgramName.Value = txtProgramName.Text;
 
                 lotInfo.OperatorID.Value = txtOperatorID.Text;
-                
+                basicInfo.OperatorID = txtOperatorID.Text;
                 lotInfo.CustomerID.Value = txtCustomerID.Text;
-
+                basicInfo.CustomerID = txtCustomerID.Text;
                 lotInfo.DeviceName.Value = txtDeviceName.Text.Replace('/', '_');
-                
+                basicInfo.DeviceName = txtDeviceName.Text.Replace('/', '_');
                 lotInfo.CustomerLotNo.Value = txtCustomerLotNo.Text;
-
+                basicInfo.CustomerLotNo = txtCustomerLotNo.Text;
                 lotInfo.SubLotNo.Value = txtSubLotNo.Text;
-
+                basicInfo.SubLotNo = txtSubLotNo.Text;
                 lotInfo.ModeCode.Value = string.Empty;
 
                 lotInfo.TestCode.Value = txtTestCode.Text;
@@ -99,8 +102,6 @@ namespace MT.APS100_A
                 lotInfo.WaferVersion.Value = string.Empty;
 
                 lotInfo.MotherFab.Value = string.Empty;
-
-                //BasicInfo
 
                 if (OKCallback())
                 {
