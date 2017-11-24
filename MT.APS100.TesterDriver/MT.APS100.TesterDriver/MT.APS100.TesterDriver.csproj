@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{13F2B5E6-3DFB-4BB1-942E-4716C9F95503}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MT.APS100.TesterDriver</RootNamespace>
+    <AssemblyName>MT.APS100.TesterDriver</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\..\..\MerlinTest\DLL\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aeroflex.PXI.Analysis.Common">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Aeroflex\PXI\DotNET\Current\Aeroflex.PXI.Analysis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Aeroflex.PXI.Analysis.Gsm">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Aeroflex\PXI\DotNET\Current\Aeroflex.PXI.Analysis.Gsm.dll</HintPath>
+    </Reference>
+    <Reference Include="Aeroflex.PXI.Analysis.LteTdd">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Aeroflex\PXI\DotNET\Current\Aeroflex.PXI.Analysis.LteTdd.dll</HintPath>
+    </Reference>
+    <Reference Include="Aeroflex.PXI.Analysis.LteUplink">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Aeroflex\PXI\DotNET\Current\Aeroflex.PXI.Analysis.LteUplink.dll</HintPath>
+    </Reference>
+    <Reference Include="Aeroflex.PXI.Analysis.Tdscdma">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Aeroflex\PXI\DotNET\Current\Aeroflex.PXI.Analysis.Tdscdma.dll</HintPath>
+    </Reference>
+    <Reference Include="Aeroflex.PXI.Analysis.UmtsUplink">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Aeroflex\PXI\DotNET\Current\Aeroflex.PXI.Analysis.UmtsUplink.dll</HintPath>
+    </Reference>
+    <Reference Include="afdigitizerdotnet, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Aeroflex\PXI\DotNET\Current\afdigitizerdotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="afsiggendotnet, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Aeroflex\PXI\DotNET\Current\afsiggendotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Ivi.Visa.Interop, Version=5.3.0.0, Culture=neutral, PublicKeyToken=a128c98f1d7717c1, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\IVI Foundation\VISA\VisaCom\Primary Interop Assemblies\Ivi.Visa.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="NationalInstruments.DAQmx, Version=16.1.45.70, Culture=neutral, PublicKeyToken=4febd62461bf11a4, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MerlinTest\DLL\NationalInstruments.DAQmx.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnalogMeasure.cs" />
+    <Compile Include="Cal_Import.cs" />
+    <Compile Include="Definitions.cs" />
+    <Compile Include="Digital_PE32H.cs" />
+    <Compile Include="LteAnalysis.cs" />
+    <Compile Include="Matrix.cs" />
+    <Compile Include="mtDigitizer.cs" />
+    <Compile Include="mtSigGen.cs" />
+    <Compile Include="PowerSupply.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rsnrpz32.cs" />
+    <Compile Include="TdscdmaAnalysis.cs" />
+    <Compile Include="Tester.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="WcdmaAnalysis.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
