@@ -21,6 +21,7 @@
                     <MenuItem Header="Create Project" Name="Btn_CreateProject" Click="Btn_CreateProject_Click" Visibility="Collapsed" />
                     <MenuItem Header="Config Project" Name="Btn_Configuration" Click="Btn_Configuration_Click" Visibility="Collapsed" />
                     <MenuItem Header="Config Environment" Name="btnEnvironment" Click="btnEnvironment_Click" />
+                    <MenuItem Header="User Calibration" Name="btnUserCalibration" Click="btnUserCalibration_Click" />
                 </MenuItem>
             </Menu>
         </Grid>

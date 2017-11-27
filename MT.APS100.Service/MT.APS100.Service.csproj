@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="STDFService.cs" />
     <Compile Include="UIService.cs" />
+    <Compile Include="TesterService.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ZipService.cs" />
   </ItemGroup>
@@ -60,6 +61,10 @@
     <ProjectReference Include="..\MT.APS100.Model\MT.APS100.Model.csproj">
       <Project>{c86085b1-c9e5-48c4-8a7c-f751b25e270f}</Project>
       <Name>MT.APS100.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MT.APS100.TesterDriver\MT.APS100.TesterDriver\MT.APS100.TesterDriver.csproj">
+      <Project>{13f2b5e6-3dfb-4bb1-942e-4716c9f95503}</Project>
+      <Name>MT.APS100.TesterDriver</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

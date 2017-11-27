@@ -1132,5 +1132,36 @@ namespace MT.APS100_A
             }
         }
         #endregion
+
+        private void btnUserCalibration_Click(object sender, RoutedEventArgs e)
+        {
+            lotInfo = new LotInfo();
+            UserCalibration userCalibration = new UserCalibration(lotInfo);
+            userCalibration.OKCallback += UserCalibration_OKCallback;
+            userCalibration.ShowDialog();
+        }
+
+        private bool UserCalibration_OKCallback()
+        {
+            try
+            {
+                txtProgramLocation.Text = Path.Combine(enviConfig.LocalProgDir, lotInfo.ProgramName.ToString());
+                if (!Directory.Exists(txtProgramLocation.Text))
+                {
+                    MessageBox.Show("alarm M10:Program不存在，请确认后重新输入 !");
+                    return false;
+                }
+
+                TesterService testerService = new TesterService();
+                testerService.UserCal(txtProgramLocation.Text);
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("System error: " + ex.Message + " Please contact the developer!");
+                return false;
+            }
+        }
     }
 }
