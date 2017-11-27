@@ -174,15 +174,13 @@ namespace MT.APS100.TesterDriver
             status = SigGen.RF.ModulationSource_Set(afSigGenDll_msModulationSource_t.afSigGenDll_msCW);
         }
 
-        public int LoadModulationFiles(string instrName, List<CalData> calSetup)
+        public int LoadModulationFiles(string instrName, List<CalData> calSetup, string waveDir)
         {
             int status = -1;
             int numOfMododulationFiles = 0;
             bool modulationFileExists = false;
             string waveformFile = "";
             string[] waveformList = new string[128];
-            //string wavePath = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Waveforms\\");
-            string wavePath = Path.Combine(Directory.GetParent(Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath)).FullName, "Waveforms\\");
 
 
             //-------------------- Generate List of Unique Modulation Files from Cal Config --------------------
@@ -206,7 +204,7 @@ namespace MT.APS100.TesterDriver
                         waveformList[numOfMododulationFiles++] = calSetup[calIndex].modulationFile;
                     }
 
-                    calSetup[calIndex].modulationFile = wavePath + calSetup[calIndex].modulationFile;
+                    calSetup[calIndex].modulationFile = Path.Combine(waveDir, calSetup[calIndex].modulationFile);
                 }
             }
 
@@ -221,7 +219,7 @@ namespace MT.APS100.TesterDriver
 
             for (int modIndex = 0; modIndex < numOfMododulationFiles; modIndex++)
             {
-                waveformFile = wavePath + waveformList[modIndex];
+                waveformFile = Path.Combine(waveDir, waveformList[modIndex]);
 
                 if (enhArb_avail) status = SigGen.EnhARB.Catalogue.AddFile(waveformFile);
                 else status = SigGen.ARB.Catalogue.AddFile(waveformFile);
@@ -266,6 +264,10 @@ namespace MT.APS100.TesterDriver
             }
             else if ((modulationType == "LTE-FDD") || (modulationType == "LTE-TDD") || (modulationType == "TD-SCDMA") || (modulationType == "WCDMA") || (modulationType == "WLAN"))
             {
+                if (!File.Exists(modulationFile))
+                {
+                    throw new FileNotFoundException(string.Format("Modulation File {0} doesn't exist!", modulationFile));
+                }
                 status = SigGen.RF.ModulationSource_Set(afSigGenDll_msModulationSource_t.afSigGenDll_msARB);
 
                 if (enhArb_avail) status = SigGen.EnhARB.Catalogue.PlayFile(modulationFile);

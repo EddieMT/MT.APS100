@@ -43,9 +43,9 @@ namespace MT.APS100.TesterDriver
 
             reset(1);
             cal_reset(1);
-            cal_load_auto(1, "C://MerlinTest//System//Calibration//OpenATE//");
+            status = cal_load_auto(1, "C://MerlinTest//System//Calibration//OpenATE//");
             set_pxi(1, 0);
-            //lstatus = lmload(1, 1, 0, filePath);
+            //long lstatus = lmload(1, 1, 0, filePath);
 
             serialNo = rd_pesno(1);
             if (writeToConsole) Console.WriteLine("Digital module serial number: {0}\n", serialNo);
@@ -147,22 +147,22 @@ namespace MT.APS100.TesterDriver
             PInvoke.reset(bdno);
         }
 
-        public void set_ftcnt(int bdno, long cnt)
+        public void set_ftcnt(int bdno, int cnt)
         {
             PInvoke.set_ftcnt(bdno, cnt);
         }
 
-        public void set_addbeg(int bdno, long add)
+        public void set_addbeg(int bdno, int add)
         {
             PInvoke.set_addbeg(bdno, add);
         }
 
-        public void set_addend(int bdno, long add)
+        public void set_addend(int bdno, int add)
         {
             PInvoke.set_addend(bdno, add);
         }
 
-        public void set_addsyn(int bdno, long add)
+        public void set_addsyn(int bdno, int add)
         {
             PInvoke.set_addsyn(bdno, add);
         }
@@ -215,34 +215,34 @@ namespace MT.APS100.TesterDriver
 
         // PE32H Formatter Functions --------------------------------------------------
 
-        public void set_tp(int bdno, int ts, long data)
+        public void set_tp(int bdno, int ts, int data)
         {
             PInvoke.set_ro(bdno, ts, data);
         }
 
-        public void set_tstart(int bdno, int pno, int ts, long data)
+        public void set_tstart(int bdno, int pno, int ts, int data)
         {
             PInvoke.set_tstart(bdno, pno, ts, data);
         }
 
-        public void set_tstop(int bdno, int pno, int ts, long data)
+        public void set_tstop(int bdno, int pno, int ts, int data)
         {
             PInvoke.set_tstop(bdno, pno, ts, data);
         }
 
-        public void set_rz(int bdno, int fs, long data)
+        public void set_rz(int bdno, int fs, int data)
         {
             PInvoke.set_rz(bdno, fs, data);
         }
 
-        public void set_ro(int bdno, int fs, long data)
+        public void set_ro(int bdno, int fs, int data)
         {
             PInvoke.set_ro(bdno, fs, data);
         }
 
-        public long lmload(int begbdno, int boardwidth, long begadd, string patternfile)
+        public int lmload(int begbdno, int boardwidth, int begadd, string patternfile)
         {
-            long pInvokeResult = PInvoke.lmload(begbdno, boardwidth, begadd, patternfile);
+            int pInvokeResult = PInvoke.lmload(begbdno, boardwidth, begadd, patternfile);
             PInvoke.TestForError((int)pInvokeResult);
             return pInvokeResult;
         }
@@ -377,16 +377,16 @@ namespace MT.APS100.TesterDriver
             public static extern void reset(int bdno);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_set_ftcnt", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void set_ftcnt(int bdno, long cnt);
+            public static extern void set_ftcnt(int bdno, int cnt);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_set_addbeg", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void set_addbeg(int bdno, long add);
+            public static extern void set_addbeg(int bdno, int add);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_set_addend", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void set_addend(int bdno, long add);
+            public static extern void set_addend(int bdno, int add);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_set_addsyn", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void set_addsyn(int bdno, long add);
+            public static extern void set_addsyn(int bdno, int add);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_fstart", CallingConvention = CallingConvention.Cdecl)]
             public static extern void fstart(int bdno, int onoff);
@@ -415,22 +415,22 @@ namespace MT.APS100.TesterDriver
             // PE32H Formatter Functions --------------------------------------------------
 
             [DllImport("PE32.dll", EntryPoint = "pe32_set_tp", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void set_tp(int bdno, int ts, long data);
+            public static extern void set_tp(int bdno, int ts, int data);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_set_tstart", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void set_tstart(int bdno, int pno, int ts, long data);
+            public static extern void set_tstart(int bdno, int pno, int ts, int data);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_set_tstop", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void set_tstop(int bdno, int pno, int ts, long data);
+            public static extern void set_tstop(int bdno, int pno, int ts, int data);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_set_rz", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void set_rz(int bdno, int fs, long data);
+            public static extern void set_rz(int bdno, int fs, int data);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_set_ro", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void set_ro(int bdno, int fs, long data);
+            public static extern void set_ro(int bdno, int fs, int data);
 
             [DllImport("PE32.dll", EntryPoint = "pe32_lmload", CallingConvention = CallingConvention.Cdecl)]
-            public static extern long lmload(int begbdno, int boardwidth, long begadd, string patternfile);
+            public static extern int lmload(int begbdno, int boardwidth, int begadd, string patternfile);
 
             // PE32H Pin Electronics Functions --------------------------------------------------
 

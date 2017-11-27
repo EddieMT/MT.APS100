@@ -146,6 +146,7 @@ namespace MT.APS100.TesterDriver
 
         #region UserCal
         private string programName;
+        private string waveDir;
         private string calConfigFile;
         private string calDataFile_RF;
         private string calDataFile_DC;
@@ -160,6 +161,15 @@ namespace MT.APS100.TesterDriver
             DirectoryInfo directoryInfo = new DirectoryInfo(ProgramDir);
             programName = directoryInfo.Name;
             calConfigFile = Path.Combine(ProgramDir, "Calibration", programName + "_Cal_Config.csv");
+            if (!File.Exists(calConfigFile))
+            {
+                throw new FileNotFoundException(string.Format("File {0} is not found!", calConfigFile));
+            }
+            waveDir = Path.Combine(ProgramDir, "Waveforms");
+            if (!Directory.Exists(waveDir))
+            {
+                throw new DirectoryNotFoundException(string.Format("Directory {0} is not found!", waveDir));
+            }
             calDataFile_RF = Path.Combine(Util.USERCAL_DIR, programName + "_RF_Cal_Data.csv");
             calDataFile_DC = Path.Combine(Util.USERCAL_DIR, programName + "_DC_Cal_Data.csv");
             calMeter = new PowerMeter();
@@ -195,8 +205,8 @@ namespace MT.APS100.TesterDriver
                 {
                     InstrumentStartup_RF(); // Initialize RF instruments
                     status = Calibration_RF(0); // Perform user calibration (RF)
+                    InstrumentShutdown_RF(); // Close RF instruments
                 }
-                InstrumentShutdown_RF(); // Close RF instruments
             }
         }
 
@@ -234,9 +244,9 @@ namespace MT.APS100.TesterDriver
             //-------------------- Load Modulation Waveforms --------------------
 
             if (SigGen1 != null)
-                SigGen1.LoadModulationFiles("SG1", calSetup);
+                SigGen1.LoadModulationFiles("SG1", calSetup, waveDir);
             if (SigGen2 != null)
-                SigGen2.LoadModulationFiles("SG2", calSetup);
+                SigGen2.LoadModulationFiles("SG2", calSetup, waveDir);
         }
 
         private void InstrumentShutdown_DC()
@@ -1156,7 +1166,8 @@ namespace MT.APS100.TesterDriver
     {
         static void Main()
         {
-            
+            Tester tester = new Tester();
+            tester.Initialize();
         }
     }
 }
