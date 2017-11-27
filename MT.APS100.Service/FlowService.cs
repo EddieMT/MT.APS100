@@ -54,7 +54,7 @@ namespace MT.APS100.Service
             limits = GetLimits();
             ValidateLimits();
 
-            calPath = Path.Combine(FileStructure.USERCAL_DIR, programName + ".csv");
+            calPath = Path.Combine(FileStructure.USERCAL_DIR, programName + "_RF_Cal_Data.csv");
         }
 
         public int Load()
