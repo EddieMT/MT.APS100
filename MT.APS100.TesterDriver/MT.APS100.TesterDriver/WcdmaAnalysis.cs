@@ -165,4 +165,14 @@ namespace MT.APS100.TesterDriver
             }
         }
     }
+
+    public class WcdmaThreadObject
+    {
+        public int index { get; set; }
+        public object wcdmaLock = new object();
+
+        public WcdmaThreadObject()
+        {
+        }
+    }
 }

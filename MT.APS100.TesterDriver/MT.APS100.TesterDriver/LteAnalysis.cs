@@ -356,4 +356,15 @@ namespace MT.APS100.TesterDriver
             }
         }
     }
+
+    public class LteThreadObject
+    {
+        public int index { get; set; }
+        public AclrMode mode { get; set; }
+        public object lteLock = new object();
+
+        public LteThreadObject()
+        {
+        }
+    }
 }

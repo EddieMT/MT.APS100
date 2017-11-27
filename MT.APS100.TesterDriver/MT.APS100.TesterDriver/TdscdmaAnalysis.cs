@@ -157,4 +157,14 @@ namespace MT.APS100.TesterDriver
             }
         }
     }
+
+    public class TdscdmaThreadObject
+    {
+        public int index { get; set; }
+        public object tdscdmaLock = new object();
+
+        public TdscdmaThreadObject()
+        {
+        }
+    }
 }
