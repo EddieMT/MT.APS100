@@ -62,8 +62,8 @@
       <Project>{c86085b1-c9e5-48c4-8a7c-f751b25e270f}</Project>
       <Name>MT.APS100.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MT.APS100.TesterDriver\MT.APS100.TesterDriver\MT.APS100.TesterDriver.csproj">
-      <Project>{13f2b5e6-3dfb-4bb1-942e-4716c9f95503}</Project>
+    <ProjectReference Include="..\MT.APS100.TesterDriver\MT.APS100.TesterDriver.csproj">
+      <Project>{20b96693-e820-4f34-9308-10b6e600e886}</Project>
       <Name>MT.APS100.TesterDriver</Name>
     </ProjectReference>
   </ItemGroup>
