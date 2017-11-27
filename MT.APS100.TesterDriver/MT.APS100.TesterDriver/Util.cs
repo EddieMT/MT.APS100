@@ -20,5 +20,7 @@ namespace MT.APS100.TesterDriver
         }
 
         public const string USERCAL_DIR = @"C:\MerlinTest\UserCal\";
+
+        public const int DEFAULT_TEST_RESULT = -999999999;
     }
 }
