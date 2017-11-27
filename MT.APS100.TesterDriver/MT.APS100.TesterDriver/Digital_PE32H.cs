@@ -113,6 +113,11 @@ namespace MT.APS100.TesterDriver
             pmufv(1, 0, 0, 10);
             con_pmu(1, 0, 0);
             */
+            set_logmode(1, 1);
+            set_addsyn(1, 0);
+            pmufv(1, 0, 0.0, 10);//board number, chip number, voltage, clampi  ALL CHANNEL
+            con_pmu(1, 0, 0);
+
 
             return 0;
         }
@@ -217,7 +222,7 @@ namespace MT.APS100.TesterDriver
 
         public void set_tp(int bdno, int ts, int data)
         {
-            PInvoke.set_ro(bdno, ts, data);
+            PInvoke.set_tp(bdno, ts, data);
         }
 
         public void set_tstart(int bdno, int pno, int ts, int data)
